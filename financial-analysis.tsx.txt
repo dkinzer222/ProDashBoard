@@ -1,0 +1,58 @@
+'use client'
+
+import { useState } from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { QrCode } from 'lucide-react'
+
+export default function FinancialAnalysis() {
+  const [walletAddress, setWalletAddress] = useState('')
+
+  return (
+    <div>
+      <h2 className="text-3xl font-bold mb-4">Financial and Investment Analysis</h2>
+      <Tabs defaultValue="wallet">
+        <TabsList>
+          <TabsTrigger value="wallet">Blockchain Wallet</TabsTrigger>
+          <TabsTrigger value="investment">Investment Simulations</TabsTrigger>
+        </TabsList>
+        <TabsContent value="wallet">
+          <Card>
+            <CardHeader>
+              <CardTitle>Blockchain Wallet Integration</CardTitle>
+              <CardDescription>Manage secure, on-chain transactions</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex space-x-2 mb-4">
+                <Input
+                  placeholder="Enter wallet address"
+                  value={walletAddress}
+                  onChange={(e) => setWalletAddress(e.target.value)}
+                />
+                <Button>Connect Wallet</Button>
+              </div>
+              <div className="flex justify-center items-center border border-dashed border-gray-300 rounded-lg h-48 w-48 mx-auto">
+                <QrCode size={120} />
+              </div>
+              <p className="text-center mt-4">Scan QR code to transfer funds</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="investment">
+          <Card>
+            <CardHeader>
+              <CardTitle>Investment Simulations</CardTitle>
+              <CardDescription>Explore potential property investments</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* Investment simulation implementation */}
+              <p>Crypto-based investment simulations and sweepstakes would be implemented here.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}

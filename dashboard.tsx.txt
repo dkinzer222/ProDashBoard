@@ -1,0 +1,68 @@
+'use client'
+
+import { useState } from 'react'
+import { Bell, Home, Users, DollarSign, BarChart2, FileText, Bot, Share2 } from 'lucide-react'
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { ScrollArea } from "@/components/ui/scroll-area"
+import PropertySearch from './property-search'
+import ClientManagement from './client-management'
+import FinancialAnalysis from './financial-analysis'
+import VisualAnalytics from './visual-analytics'
+import DocumentAutomation from './document-automation'
+import AISupport from './ai-support'
+import NetworkingTools from './networking-tools'
+
+export default function Dashboard() {
+  const [activeSection, setActiveSection] = useState('property')
+
+  const menuItems = [
+    { id: 'property', label: 'Property Search', icon: Home },
+    { id: 'clients', label: 'Client Management', icon: Users },
+    { id: 'financial', label: 'Financial Analysis', icon: DollarSign },
+    { id: 'analytics', label: 'Visual Analytics', icon: BarChart2 },
+    { id: 'documents', label: 'Document Automation', icon: FileText },
+    { id: 'ai', label: 'AI Support', icon: Bot },
+    { id: 'networking', label: 'Networking Tools', icon: Share2 },
+  ]
+
+  return (
+    <div className="flex h-screen bg-background">
+      {/* Sidebar */}
+      <div className="w-64 bg-muted p-4 flex flex-col">
+        <div className="text-2xl font-bold mb-8">AgentDash</div>
+        <ScrollArea className="flex-grow">
+          {menuItems.map((item) => (
+            <Button
+              key={item.id}
+              variant="ghost"
+              className={cn(
+                "w-full justify-start mb-2",
+                activeSection === item.id && "bg-accent text-accent-foreground"
+              )}
+              onClick={() => setActiveSection(item.id)}
+            >
+              <item.icon className="mr-2 h-4 w-4" />
+              {item.label}
+            </Button>
+          ))}
+        </ScrollArea>
+        <Button variant="outline" className="mt-auto">
+          <Bell className="mr-2 h-4 w-4" />
+          Notifications
+        </Button>
+      </div>
+
+      {/* Main content area */}
+      <div className="flex-1 p-8 overflow-auto">
+        {activeSection === 'property' && <PropertySearch />}
+        {activeSection === 'clients' && <ClientManagement />}
+        {activeSection === 'financial' && <FinancialAnalysis />}
+        {activeSection === 'analytics' && <VisualAnalytics />}
+        {activeSection === 'documents' && <DocumentAutomation />}
+        {activeSection === 'ai' && <AISupport />}
+        {activeSection === 'networking' && <NetworkingTools />}
+      </div>
+    </div>
+  )
+}

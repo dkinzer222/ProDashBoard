@@ -1,0 +1,60 @@
+'use client'
+
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+
+const mockData = [
+  { name: 'Jan', value: 4000 },
+  { name: 'Feb', value: 3000 },
+  { name: 'Mar', value: 2000 },
+  { name: 'Apr', value: 2780 },
+  { name: 'May', value: 1890 },
+  { name: 'Jun', value: 2390 },
+]
+
+export default function VisualAnalytics() {
+  return (
+    <div>
+      <h2 className="text-3xl font-bold mb-4">Visual Data and Analytics</h2>
+      <Tabs defaultValue="trends">
+        <TabsList>
+          <TabsTrigger value="trends">Property Trends</TabsTrigger>
+          <TabsTrigger value="portfolio">Portfolio Management</TabsTrigger>
+        </TabsList>
+        <TabsContent value="trends">
+          <Card>
+            <CardHeader>
+              <CardTitle>Real-time Property Value Tracking</CardTitle>
+              <CardDescription>Neighborhood trend analysis and market forecasts</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <ResponsiveContainer width="100%" height={300}>
+                <BarChart data={mockData}>
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis  dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                  <Bar dataKey="value" fill="#8884d8" />
+                </BarChart>
+              </ResponsiveContainer>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="portfolio">
+          <Card>
+            <CardHeader>
+              <CardTitle>Portfolio Management</CardTitle>
+              <CardDescription>Summary of owned properties and ROI analytics</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* Portfolio management implementation */}
+              <p>Portfolio management tools and ROI analytics would be implemented here.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}

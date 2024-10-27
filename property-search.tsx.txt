@@ -1,0 +1,93 @@
+'use client'
+
+import { useState } from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+
+export default function PropertySearch() {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const mockProperties = [
+    { id: 1, address: '123 Main St', liens: 'None', auction: 'No', ownership: 'Individual' },
+    { id: 2, address: '456 Elm St', liens: '$5,000', auction: 'Yes', ownership: 'Trust' },
+    { id: 3, address: '789 Oak St', liens: '$2,500', auction: 'No', ownership: 'LLC' },
+  ]
+
+  return (
+    <div>
+      <h2 className="text-3xl font-bold mb-4">Property Search and Analysis</h2>
+      <Tabs defaultValue="search">
+        <TabsList>
+          <TabsTrigger value="search">Property Search</TabsTrigger>
+          <TabsTrigger value="lien">Lien Lookup</TabsTrigger>
+          <TabsTrigger value="auction">Off-Market Listings</TabsTrigger>
+        </TabsList>
+        <TabsContent value="search">
+          <Card>
+            <CardHeader>
+              <CardTitle>Search Properties</CardTitle>
+              <CardDescription>Enter an address or property details to search</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex space-x-2">
+                <Input
+                  placeholder="Enter address or property details"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button>Search</Button>
+              </div>
+              <Table className="mt-4">
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Address</TableHead>
+                    <TableHead>Liens</TableHead>
+                    <TableHead>Auction</TableHead>
+                    <TableHead>Ownership</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {mockProperties.map((property) => (
+                    <TableRow key={property.id}>
+                      <TableCell>{property.address}</TableCell>
+                      <TableCell>{property.liens}</TableCell>
+                      <TableCell>{property.auction}</TableCell>
+                      <TableCell>{property.ownership}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="lien">
+          <Card>
+            <CardHeader>
+              <CardTitle>Lien Lookup</CardTitle>
+              <CardDescription>Search for property liens</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* Lien lookup tool implementation */}
+              <p>Lien lookup functionality would be implemented here, pulling data from public databases.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="auction">
+          <Card>
+            <CardHeader>
+              <CardTitle>Off-Market Listings</CardTitle>
+              <CardDescription>View available auction properties and opportunities</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* Off-market property listings implementation */}
+              <p>Off-market property listings and auction opportunities would be displayed here.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}

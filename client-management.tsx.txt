@@ -1,0 +1,80 @@
+'use client'
+
+import { useState } from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+
+export default function ClientManagement() {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const mockClients = [
+    { id: 1, name: 'John Doe', email: 'john@example.com', phone: '123-456-7890', status: 'Active' },
+    { id: 2, name: 'Jane Smith', email: 'jane@example.com', phone: '987-654-3210', status: 'Prospect' },
+    { id: 3, name: 'Bob Johnson', email: 'bob@example.com', phone: '456-789-0123', status: 'Inactive' },
+  ]
+
+  return (
+    <div>
+      <h2 className="text-3xl font-bold mb-4">Client Management</h2>
+      <Tabs defaultValue="leads">
+        <TabsList>
+          <TabsTrigger value="leads">Lead Generation</TabsTrigger>
+          <TabsTrigger value="notifications">Notifications</TabsTrigger>
+        </TabsList>
+        <TabsContent value="leads">
+          <Card>
+            <CardHeader>
+              <CardTitle>Lead Tracking</CardTitle>
+              <CardDescription>Manage potential buyers and sellers</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex space-x-2 mb-4">
+                <Input
+                  placeholder="Search clients"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button>Search</Button>
+              </div>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Email</TableHead>
+                    <TableHead>Phone</TableHead>
+                    <TableHead>Status</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {mockClients.map((client) => (
+                    <TableRow key={client.id}>
+                      <TableCell>{client.name}</TableCell>
+                      <TableCell>{client.email}</TableCell>
+                      <TableCell>{client.phone}</TableCell>
+                      <TableCell>{client.status}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="notifications">
+          <Card>
+            <CardHeader>
+              <CardTitle>Notification Settings</CardTitle>
+              <CardDescription>Manage automated notifications and reminders</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* Notification settings implementation */}
+              <p>Notification settings and automated alerts would be configured here.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}

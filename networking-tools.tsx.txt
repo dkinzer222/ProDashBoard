@@ -1,0 +1,78 @@
+'use client'
+
+import { useState } from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+
+export default function NetworkingTools() {
+  const [searchTerm, setSearchTerm] = useState('')
+
+  const mockExperts = [
+    { id: 1, name: 'Alice Cooper', specialty: 'Home Inspector', location: 'Downtown' },
+    { id: 2, name: 'Bob Dylan', specialty: 'Appraiser', location: 'Suburbs' },
+    { id: 3, name: 'Charlie Puth', specialty: 'Contractor', location: 'Midtown' },
+  ]
+
+  return (
+    <div>
+      <h2 className="text-3xl font-bold mb-4">Networking and Marketing Tools</h2>
+      <Tabs defaultValue="experts">
+        <TabsList>
+          <TabsTrigger value="experts">Local Experts</TabsTrigger>
+          <TabsTrigger value="tours">Virtual Tours</TabsTrigger>
+        </TabsList>
+        <TabsContent value="experts">
+          <Card>
+            <CardHeader>
+              <CardTitle>Local Expert Recommendations</CardTitle>
+              <CardDescription>Find nearby professionals for your clients</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex space-x-2 mb-4">
+                <Input
+                  placeholder="Search experts"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <Button>Search</Button>
+              </div>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Name</TableHead>
+                    <TableHead>Specialty</TableHead>
+                    <TableHead>Location</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {mockExperts.map((expert) => (
+                    <TableRow key={expert.id}>
+                      <TableCell>{expert.name}</TableCell>
+                      <TableCell>{expert.specialty}</TableCell>
+                      <TableCell>{expert.location}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="tours">
+          <Card>
+            <CardHeader>
+              <CardTitle>Virtual Tours and Appointments</CardTitle>
+              <CardDescription>Schedule and manage property viewings</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* Virtual tour and appointment scheduling implementation */}
+              <p>Virtual tour creation and appointment scheduling tools would be implemented here.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}

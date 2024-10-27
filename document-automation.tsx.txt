@@ -1,0 +1,78 @@
+'use client'
+
+import { useState } from 'react'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
+
+export default function DocumentAutomation() {
+  const [documentName, setDocumentName] = useState('')
+
+  const mockDocuments = [
+    { id: 1, name: 'Purchase Agreement', type: 'Contract', status: 'Draft' },
+    { id: 2, name: 'Property Disclosure', type: 'Disclosure', status: 'Signed' },
+    { id: 3, name: 'Trust Agreement', type: 'Legal', status: 'Pending' },
+  ]
+
+  return (
+    <div>
+      <h2 className="text-3xl font-bold mb-4">Document and Contract Automation</h2>
+      <Tabs defaultValue="creation">
+        <TabsList>
+          <TabsTrigger value="creation">Document Creation</TabsTrigger>
+          <TabsTrigger value="storage">Document Storage</TabsTrigger>
+        </TabsList>
+        <TabsContent value="creation">
+          <Card>
+            <CardHeader>
+              <CardTitle>Automated Contract Creation</CardTitle>
+              <CardDescription>Create and manage property-related documents</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex space-x-2 mb-4">
+                <Input
+                  placeholder="Enter document name"
+                  value={documentName}
+                  onChange={(e) => setDocumentName(e.target.value)}
+                />
+                <Button>Create Document</Button>
+              </div>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Document Name</TableHead>
+                    <TableHead>Type</TableHead>
+                    <TableHead>Status</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {mockDocuments.map((doc) => (
+                    <TableRow key={doc.id}>
+                      <TableCell>{doc.name}</TableCell>
+                      <TableCell>{doc.type}</TableCell>
+                      <TableCell>{doc.status}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+        </TabsContent>
+        <TabsContent value="storage">
+          <Card>
+            <CardHeader>
+              <CardTitle>Document Storage</CardTitle>
+              <CardDescription>Integrated storage for contracts and client records</CardDescription>
+            </CardHeader>
+            <CardContent>
+              {/* Document storage implementation */}
+              <p>Integration with Google Drive or similar storage solutions would be implemented here.</p>
+            </CardContent>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
+  )
+}
